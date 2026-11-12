@@ -1,0 +1,204 @@
+openapi: "3.0.3"
+info:
+  title: Billing API
+  version: "1.0.0"
+  description: |
+    Tenant-scoped billing API. All endpoints require a valid JWT containing tenantId.
+    Tenant identity is derived from JWT claims only — never from query parameters.
+
+servers:
+  - url: http://localhost:3000
+    description: Local development
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT must contain tenantId and sub claims
+
+  schemas:
+    Invoice:
+      type: object
+      required: [id, invoiceNumber, customerId, amountCents, currency, status]
+      properties:
+        id:
+          type: string
+          format: uuid
+        invoiceNumber:
+          type: string
+        customerId:
+          type: string
+        amountCents:
+          type: integer
+          minimum: 0
+        currency:
+          type: string
+          pattern: "^[A-Z]{3}$"
+        status:
+          type: string
+          enum: [draft, issued, paid, overdue, cancelled]
+        issuedAt:
+          type: string
+          format: date-time
+          nullable: true
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+        paidAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+security:
+  - BearerAuth: []
+
+paths:
+  /v1/invoices:
+    get:
+      summary: List invoices
+      description: |
+        Returns paginated invoices for the authenticated tenant.
+        BACKWARD COMPATIBLE — do not add required parameters to this endpoint.
+      operationId: listInvoices
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [draft, issued, paid, overdue, cancelled]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [invoices, total, page, pageSize]
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Invoice"
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /v1/invoices/export:
+    get:
+      summary: Export invoices as CSV
+      description: |
+        Export tenant-scoped invoices as CSV. Max 10,000 rows per request.
+        CSV cells are sanitized against formula injection.
+        This is a NEW endpoint — it does not change GET /v1/invoices.
+      operationId: exportInvoices
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+            default: 10000
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [draft, issued, paid, overdue, cancelled]
+        - name: fromDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: CSV file
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+            X-Export-Count:
+              schema:
+                type: integer
+          content:
+            text/csv:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /health:
+    get:
+      summary: Health check
+      security: []
+      operationId: healthCheck
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ok, degraded]
+                  db:
+                    type: string
+        "503":
+          description: Unhealthy

@@ -1,0 +1,32 @@
+apiVersion: factory.contract/v1
+kind: RepositoryContract
+
+metadata:
+  name: factory-reference-billing-api
+  owner: billing-domain
+  language: TypeScript
+  description: Reference billing API — tenant-scoped invoice export
+
+consumedRelease: "1.4.0"
+
+build:
+  install: "pnpm install --frozen-lockfile"
+  typecheck: "pnpm typecheck"
+  lint: "pnpm lint"
+  test: "pnpm test"
+  e2eTest: "pnpm test:e2e"
+  openApiValidate: "pnpm openapi:validate"
+
+acceptance:
+  requiredChecks:
+    - factory-contract/acceptance
+  compatibilityBaselinePath: openapi/openapi.yaml
+  tenantIsolationRequired: true
+  piiPolicies:
+    - no-raw-pii-in-logs
+    - tenant-scoped-data-only
+
+doNotModify:
+  - .factory/repository-contract.yaml
+  - .github/workflows/ci.yml
+  - openapi/compatibility-baseline.yaml

@@ -1,0 +1,10 @@
+{
+  "tenantId": "tenant-a",
+  "jwt": {
+    "sub": "user-a1",
+    "tenantId": "tenant-a",
+    "email": "user@tenant-a.example.com",
+    "roles": ["admin"]
+  },
+  "expectedInvoiceNumbers": ["INV-001", "INV-002", "INV-003"]
+}

@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  billing-api:
+    build: ..
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://billing:billing@billing-db:5432/billing
+      JWT_SECRET: ${JWT_SECRET:-replace-in-production-min-256-bits}
+      PORT: 3000
+    depends_on:
+      billing-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+      interval: 10s
+      retries: 5
+
+  billing-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: billing
+      POSTGRES_PASSWORD: billing
+      POSTGRES_DB: billing
+    volumes:
+      - billing_db:/var/lib/postgresql/data
+      - ../migrations/001_init.sql:/docker-entrypoint-initdb.d/001.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U billing"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  billing_db:
