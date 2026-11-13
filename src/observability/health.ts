@@ -20,3 +20,4 @@ export async function healthRoutes(app: FastifyInstance): Promise<void> {
 // debug trigger Fri 13 Nov 2026 23:05:59 IST
 // kit.request fix Fri 13 Nov 2026 23:10:30 IST
 // full fix Fri 13 Nov 2026 23:15:10 IST
+// protected_paths fix Fri 13 Nov 2026 23:20:16 IST
