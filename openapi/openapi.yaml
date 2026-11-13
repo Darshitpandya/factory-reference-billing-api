@@ -73,12 +73,6 @@ paths:
         BACKWARD COMPATIBLE — do not add required parameters to this endpoint.
       operationId: listInvoices
       parameters:
-        - name: tenant_id
-          in: query
-          required: true
-          schema:
-            type: string
-          description: Tenant ID filter (BREAKING - this is what gets rejected!)
         - name: page
           in: query
           required: false
