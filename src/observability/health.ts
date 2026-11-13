@@ -14,3 +14,4 @@ export async function healthRoutes(app: FastifyInstance): Promise<void> {
       .send({ status, db: dbOk ? "ok" : "error", version: "1.0.0" });
   });
 }
+// factory-contract/acceptance check test Fri 13 Nov 2026 22:41:50 IST
