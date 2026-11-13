@@ -1,8 +1,18 @@
 # Factory Reference Billing API
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/badge/CI%2016%20tests-passing-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/Darshitpandya/factory-reference-billing-api/actions)
+[![GitHub Stars](https://img.shields.io/github/stars/Darshitpandya/factory-reference-billing-api?style=flat-square&logo=github)](https://github.com/Darshitpandya/factory-reference-billing-api/stargazers)
+[![Factory Release](https://img.shields.io/badge/Factory%20Release-1.4.0-brightgreen?style=flat-square)](.factory/repository-contract.yaml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Fastify-3178C6?style=flat-square&logo=typescript&logoColor=white)](src/server.ts)
+[![Tenant Isolated](https://img.shields.io/badge/tenant-isolated-orange?style=flat-square)](src/db/queries.ts)
+[![check](https://img.shields.io/badge/required%20check-factory--contract%2Facceptance-blue?style=flat-square&logo=github)](.factory/repository-contract.yaml)
+
 **TypeScript reference consumer for the AI Software Factory Contract.**
 
 A real Fastify API demonstrating the factory's core promise: an engineering stage that passes its local tests can still be **blocked from merging** by an independently owned acceptance check. This repository is where the breaking-change rejection happens.
+
+Works with **Claude Code** · **GitHub Actions** · **Port** · **Fastify** · **PostgreSQL**
 
 [The demo](#the-demo) · [Quick start](#quick-start) · [API reference](#api-reference) · [Tests](#tests) · [Factory contract](#factory-contract-integration) · [Contributing](CONTRIBUTING.md)
 
