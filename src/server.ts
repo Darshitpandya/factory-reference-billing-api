@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import fastifyJwt from "@fastify/jwt";
-import fastifyPostgres from "@fastify/postgres";
+import { Pool } from "pg";
 import { invoicesRoutes } from "./routes/invoices.js";
 import { exportRoutes } from "./routes/export.js";
 import { healthRoutes } from "./observability/health.js";
@@ -13,10 +13,12 @@ app.register(fastifyJwt, {
   sign: { algorithm: "HS256" },
 });
 
-// PostgreSQL
-app.register(fastifyPostgres, {
-  connectionString: process.env["DATABASE_URL"] ?? "postgresql://billing:billing@localhost:5432/billing",
+// PostgreSQL — added as a decorator (avoids @fastify/postgres version issues)
+const pool = new Pool({
+  connectionString: process.env["DATABASE_URL"] ?? "",
+  ssl: (process.env["DATABASE_URL"] ?? "").includes(".railway.") ? { rejectUnauthorized: false } : false,
 });
+app.decorate("pg", { pool });
 
 // Routes
 app.register(invoicesRoutes);

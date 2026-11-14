@@ -11,9 +11,6 @@ importers:
       '@fastify/jwt':
         specifier: ^8.0.0
         version: 8.0.1
-      '@fastify/postgres':
-        specifier: ^5.0.0
-        version: 5.0.0(pg@8.23.1)
       fastify:
         specifier: ^4.28.0
         version: 4.29.1
@@ -351,11 +348,6 @@ packages:
   '@fastify/merge-json-schemas@0.1.1':
     resolution: {integrity: sha512-fERDVz7topgNjtXsJTTW1JKLy0rhuLRcquYqNR9rF7OcVpCa2OVW49ZPDIhaRRCaUuvVxI+N416xUoF76HNSXA==}
 
-  '@fastify/postgres@5.0.0':
-    resolution: {integrity: sha512-FXb6EA2bu18Gl4i82h82JUP7j704PCEin7fMf8Wm0MilZw2gJ0f/0qhEAP1XzZjFdhqLTAxNXCE5URt+nE+02Q==}
-    peerDependencies:
-      pg: '>=6.0.0'
-
   '@jridgewell/sourcemap-codec@1.6.0':
     resolution: {integrity: sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==}
 
@@ -653,9 +645,6 @@ packages:
   fastfall@1.5.1:
     resolution: {integrity: sha512-KH6p+Z8AKPXnmA7+Iz2Lh8ARCMr+8WNPVludm1LGkZoD2MjY6LVnRMtTKhkdzI+jr0RzQWXKzKyBJm1zoHEL4Q==}
     engines: {node: '>=0.10.0'}
-
-  fastify-plugin@3.0.1:
-    resolution: {integrity: sha512-qKcDXmuZadJqdTm6vlCqioEbyewF60b/0LOFCcYN1B6BIZGlYJumWWOYs70SFYLDAH4YqdE1cxH/RKMG7rFxgA==}
 
   fastify-plugin@4.5.1:
     resolution: {integrity: sha512-stRHYGeuqpEZTL1Ef0Ovr2ltazUT9g844X5z/zEBFLG8RYlpDiOCIG+ATvYEp+/zmc7sN29mcIMp8gvYplYPIQ==}
@@ -1170,11 +1159,6 @@ snapshots:
     dependencies:
       fast-deep-equal: 3.1.3
 
-  '@fastify/postgres@5.0.0(pg@8.23.1)':
-    dependencies:
-      fastify-plugin: 3.0.1
-      pg: 8.23.1
-
   '@jridgewell/sourcemap-codec@1.6.0': {}
 
   '@lukeed/ms@2.0.2': {}
@@ -1467,8 +1451,6 @@ snapshots:
   fastfall@1.5.1:
     dependencies:
       reusify: 1.1.0
-
-  fastify-plugin@3.0.1: {}
 
   fastify-plugin@4.5.1: {}
 
