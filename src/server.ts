@@ -24,7 +24,7 @@ app.register(exportRoutes);
 app.register(healthRoutes);
 
 // Start
-const port = parseInt(process.env["PORT"] ?? "3000");
+const port = parseInt(process.env["PORT"] ?? process.env["BILLING_PORT"] ?? "3000");
 const host = process.env["HOST"] ?? "0.0.0.0";
 
 app.listen({ port, host }, (err) => {
