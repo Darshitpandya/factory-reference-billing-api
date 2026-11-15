@@ -1,7 +1,7 @@
 # Factory Reference Billing API
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![CI](https://img.shields.io/badge/CI%2016%20tests-passing-brightgreen?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/Darshitpandya/factory-reference-billing-api/actions)
+[![CI](https://github.com/Darshitpandya/factory-reference-billing-api/actions/workflows/ci.yml/badge.svg)](https://github.com/Darshitpandya/factory-reference-billing-api/actions/workflows/ci.yml)
 [![GitHub Stars](https://img.shields.io/github/stars/Darshitpandya/factory-reference-billing-api?style=flat-square&logo=github)](https://github.com/Darshitpandya/factory-reference-billing-api/stargazers)
 [![Factory Release](https://img.shields.io/badge/Factory%20Release-1.4.0-brightgreen?style=flat-square)](.factory/repository-contract.yaml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Fastify-3178C6?style=flat-square&logo=typescript&logoColor=white)](src/server.ts)
@@ -215,6 +215,20 @@ The reference WorkOrder is in `.factory/work-orders/invoice-export.yaml`. To sub
 - Raw invoice data is never logged
 - Do not modify `.factory/repository-contract.yaml` or the OpenAPI baseline in the same PR as code changes
 - See [SECURITY.md](SECURITY.md)
+
+---
+
+## Deploy to Railway
+
+A provisioning script automates PostgreSQL setup and Railway deployment:
+
+```bash
+# Prerequisites: Railway CLI installed, logged in, project linked
+railway login
+./scripts/provision-railway-db.sh
+```
+
+The script adds a PostgreSQL plugin, injects `DATABASE_URL`, and triggers a redeployment. See `scripts/provision-railway-db.sh` for details.
 
 ---
 
