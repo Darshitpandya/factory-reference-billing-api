@@ -6,3 +6,5 @@ dist/
 coverage/
 .cache/
 *.tsbuildinfo
+v007_slide_evidence_collect.md
+v007-evidence-ss/
