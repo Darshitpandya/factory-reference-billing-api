@@ -1,5 +1,6 @@
-# BASELINE — this is the protected stable API surface.
-# The trusted verifier uses this file at base SHA to detect breaking changes.
+# BASELINE — documents the stable API surface for the invoice endpoint.
+# The trusted verifier compares openapi/openapi.yaml at the base SHA against the PR head SHA.
+# This file is not read by the verifier. See policies/billing-api.yaml in ai-factory-trusted-verifier.
 # A PR that adds a required parameter to /v1/invoices WILL be rejected.
 
 openapi: "3.0.3"
