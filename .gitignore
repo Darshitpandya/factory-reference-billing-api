@@ -1,10 +1,15 @@
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
+*.tsbuildinfo
+
+# Environment — never commit real credentials
 .env
 .env.local
 *.env
+
+# Test coverage
 coverage/
 .cache/
-*.tsbuildinfo
-v007_slide_evidence_collect.md
-v007-evidence-ss/
