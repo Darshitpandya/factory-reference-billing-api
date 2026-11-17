@@ -10,13 +10,18 @@
 
 **TypeScript reference consumer for the AI Software Factory Contract.**
 
-A real Fastify API demonstrating the factory's core promise: an engineering stage that passes its local tests can still be **blocked from merging** by an independently owned acceptance check. This repository is where the breaking-change rejection happens.
+A real Fastify API demonstrating the factory's core promise: an engineering stage that passes its local tests can still be **blocked from merging** by an independently owned acceptance check.
 
-> **Live demo:** PR #2 on this repo — attempt 1 (required param on existing endpoint) → `factory-contract/acceptance: FAILURE` ❌ · attempt 2 (compatible new route) → `factory-contract/acceptance: SUCCESS` ✅
-
-Works with **Claude Code** · **GitHub Actions** · **Port** · **Fastify** · **PostgreSQL**
+> **Live demo:** [PR #2](https://github.com/Darshitpandya/factory-reference-billing-api/pull/2) — attempt 1 (required param on existing endpoint) → `factory-contract/acceptance: FAILURE` ❌ · attempt 2 (compatible new route) → `factory-contract/acceptance: SUCCESS` ✅
 
 [The demo](#the-demo) · [Quick start](#quick-start) · [API reference](#api-reference) · [Tests](#tests) · [Factory contract](#factory-contract-integration) · [Contributing](CONTRIBUTING.md)
+
+---
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Darshitpandya/ai-software-factory-contract/main/docs/diagrams/s36-trust-boundary-dark.png">
+  <img src="https://raw.githubusercontent.com/Darshitpandya/ai-software-factory-contract/main/docs/diagrams/s36-trust-boundary-light.png" alt="The producing execution cannot own its acceptance" width="840">
+</picture>
 
 ---
 
