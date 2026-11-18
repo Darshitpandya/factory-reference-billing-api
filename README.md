@@ -12,7 +12,7 @@
 
 A real Fastify API demonstrating the factory's core promise: an engineering stage that passes its local tests can still be **blocked from merging** by an independently owned acceptance check.
 
-> **Live demo:** [PR #2](https://github.com/Darshitpandya/factory-reference-billing-api/pull/2) — attempt 1 (required param on existing endpoint) → `factory-contract/acceptance: FAILURE` ❌ · attempt 2 (compatible new route) → `factory-contract/acceptance: SUCCESS` ✅
+> **Live demo:** [PR #2](https://github.com/Darshitpandya/factory-reference-billing-api/pull/2) - attempt 1 (required param on existing endpoint) → `factory-contract/acceptance: FAILURE` ❌ · attempt 2 (compatible new route) → `factory-contract/acceptance: SUCCESS` ✅
 
 [The demo](#the-demo) · [Quick start](#quick-start) · [API reference](#api-reference) · [Tests](#tests) · [Factory contract](#factory-contract-integration) · [Contributing](CONTRIBUTING.md)
 
@@ -27,16 +27,16 @@ A real Fastify API demonstrating the factory's core promise: an engineering stag
 
 | Repo | Role |
 |---|---|
-| [`ai-software-factory-contract`](https://github.com/Darshitpandya/ai-software-factory-contract) | Factory engine — runs WorkOrders through 5 stages |
-| [`ai-factory-trusted-verifier`](https://github.com/Darshitpandya/ai-factory-trusted-verifier) | Posts `factory-contract/acceptance` check — not the factory, not CI |
-| **This repo** | TypeScript billing API — the factory's primary reference consumer |
-| [`factory-reference-notification-api`](https://github.com/Darshitpandya/factory-reference-notification-api) | Python notification API — same factory release, different domain |
+| [`ai-software-factory-contract`](https://github.com/Darshitpandya/ai-software-factory-contract) | Factory engine - runs WorkOrders through 5 stages |
+| [`ai-factory-trusted-verifier`](https://github.com/Darshitpandya/ai-factory-trusted-verifier) | Posts `factory-contract/acceptance` check - not the factory, not CI |
+| **This repo** | TypeScript billing API - the factory's primary reference consumer |
+| [`factory-reference-notification-api`](https://github.com/Darshitpandya/factory-reference-notification-api) | Python notification API - same factory release, different domain |
 
 ---
 
 ## The demo
 
-The reference WorkOrder adds `GET /v1/invoices/export` — a tenant-scoped CSV export.
+The reference WorkOrder adds `GET /v1/invoices/export` - a tenant-scoped CSV export.
 
 **The compatibility constraint:** `GET /v1/invoices` already exists and has clients. Any PR that changes its parameters is a breaking change.
 
@@ -106,7 +106,7 @@ pnpm start
 
 ## API Reference
 
-All endpoints require a valid JWT with `tenantId` and `sub` claims. Tenant identity is derived from JWT claims only — never from query parameters.
+All endpoints require a valid JWT with `tenantId` and `sub` claims. Tenant identity is derived from JWT claims only - never from query parameters.
 
 ### `GET /v1/invoices`
 
@@ -124,7 +124,7 @@ GET /v1/invoices?status=paid
 |---|---|---|---|
 | `page` | integer | No | 1 |
 | `pageSize` | integer (max 100) | No | 20 |
-| `status` | enum | No | — |
+| `status` | enum | No | - |
 
 Response:
 ```json
@@ -148,9 +148,9 @@ GET /v1/invoices/export?limit=500&status=paid&fromDate=2026-01-01&toDate=2026-06
 | Parameter | Type | Required | Default |
 |---|---|---|---|
 | `limit` | integer (max 10000) | No | 10000 |
-| `status` | enum | No | — |
-| `fromDate` | date string | No | — |
-| `toDate` | date string | No | — |
+| `status` | enum | No | - |
+| `fromDate` | date string | No | - |
+| `toDate` | date string | No | - |
 
 Response: `text/csv` with headers `invoice_id, invoice_number, customer_id, amount_cents, currency, status, issued_at, due_date`
 
@@ -193,7 +193,7 @@ This repository consumes factory release `1.4.0` and declares its acceptance req
 consumedRelease: "1.4.0"
 acceptance:
   requiredChecks:
-    - factory-contract/acceptance   # from trusted verifier App — not from GitHub Actions
+    - factory-contract/acceptance   # from trusted verifier App - not from GitHub Actions
   compatibilityBaselinePath: openapi/openapi.yaml
   tenantIsolationRequired: true
 ```
@@ -243,4 +243,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
